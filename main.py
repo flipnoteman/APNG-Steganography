@@ -7,13 +7,14 @@ files = []
 flag = ""
 
 
-# Gets the location of a picture from a linear array
+# Gets the location of a picture from a linear distance array
 def get_loc(pixel_loc, w):
     temp_height = 0
     temp = pixel_loc
     while temp > w:
         temp = temp - w
         temp_height = temp_height + 1
+    # Returns a Tuple (width, height)
     return temp, temp_height
 
 
@@ -34,6 +35,8 @@ width, height = stock_image.size
 stock_pixel = Image.frombytes("RGB", (width, height), stock_image.tobytes())
 stock_pixels = list(stock_pixel.getdata())
 
+# Iterates through each file and finds every pixel that's different
+# from the original, prints out the pixel's RGB value and it's (x, y) location in the image
 for i in range(len(files)):
     test_image = Image.open(files[i].title())
     test_pixel = Image.frombytes("RGB", (width, height), test_image.tobytes())
