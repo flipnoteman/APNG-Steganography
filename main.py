@@ -1,6 +1,6 @@
 # from Crypto.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
 from apng import APNG
-import cv2
+# cv2
 from PIL import Image
 
 files = []
@@ -36,7 +36,7 @@ stock_pixel = Image.frombytes("RGB", (width, height), stock_image.tobytes())
 stock_pixels = list(stock_pixel.getdata())
 
 # Iterates through each file and finds every pixel that's different
-# from the original, prints out the pixel's RGB value and it's (x, y) location in the image
+# from the original, prints out the pixel's RGB value, and it's (x, y) location in the image
 for i in range(len(files)):
     test_image = Image.open(files[i].title())
     test_pixel = Image.frombytes("RGB", (width, height), test_image.tobytes())
