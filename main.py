@@ -1,7 +1,8 @@
-# from Crypto.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
-from apng import APNG
 # cv2
+import Cryptodome
+from Cryptodome.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
 from PIL import Image
+from apng import APNG
 
 files = []
 flag = ""
@@ -41,11 +42,25 @@ for i in range(len(files)):
     test_image = Image.open(files[i].title())
     test_pixel = Image.frombytes("RGB", (width, height), test_image.tobytes())
     test_pixels = list(test_pixel.getdata())
-    pix_loc = []
+    pix_locs_xy = []
+    pix_locs_array = []
     dif_pixels = []
     for pix in range(len(test_pixels)):
         if stock_pixels[pix] != test_pixels[pix]:
-            pix_loc.append(get_loc(pix, width))
+            pix_locs_array.append(pix)
+            pix_locs_xy.append(get_loc(pix, width))
             dif_pixels.append(test_pixels[pix])
-    print(f"{dif_pixels} at: {pix_loc} of: {files[i].title()}")
+
+    print(f"{dif_pixels} at: {pix_locs_xy} of: {files[i].title()}")
+
+    pixel = stock_image.getpixel((get_loc()))
+
+    # bad_byte = (dif_pixels[0])
+    # orig_pix = stock_pixels[pix_locs_array[0]]
+    # orig_pix_z = orig_pix[2]
+    # unicode_flag = b2l(bytes(bad_byte)) / orig_pix_z
+    # print(chr(int(unicode_flag)))
+
+    # unicode_flag = b2l(test_pixels[pix_locs_array[0]])/stock_pixels[pix_locs_array[0]][2]
+    # print(unicode_flag)
 print(f"Length: {len(files)}")
