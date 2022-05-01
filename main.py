@@ -1,6 +1,4 @@
 # cv2
-import Cryptodome
-from Cryptodome.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
 from PIL import Image
 from apng import APNG
 
