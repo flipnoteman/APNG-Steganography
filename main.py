@@ -1,4 +1,4 @@
-# cv2
+from Cryptodome.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
 from PIL import Image
 from apng import APNG
 
@@ -51,14 +51,21 @@ for i in range(len(files)):
 
     print(f"{dif_pixels} at: {pix_locs_xy} of: {files[i].title()}")
 
-    pixel = stock_image.getpixel((get_loc()))
+    o_pixel = stock_image.getpixel(pix_locs_xy[0])
+    e_pixel = test_image.getpixel(pix_locs_xy[0])
+    r_int = e_pixel[0]
+    g_int = e_pixel[1]
+    r_byte = l2b(r_int)
+    g_byte = l2b(g_int)
+    rg_byte = r_byte
+    rg_byte += g_byte
+    ex_value = int(b2l(rg_byte)/o_pixel[2])
 
-    # bad_byte = (dif_pixels[0])
-    # orig_pix = stock_pixels[pix_locs_array[0]]
-    # orig_pix_z = orig_pix[2]
-    # unicode_flag = b2l(bytes(bad_byte)) / orig_pix_z
-    # print(chr(int(unicode_flag)))
+    flag += ''.join(chr(ex_value))
+    print(r_byte)
+    print(g_byte)
+    print(rg_byte)
+    print(ex_value)
 
-    # unicode_flag = b2l(test_pixels[pix_locs_array[0]])/stock_pixels[pix_locs_array[0]][2]
-    # print(unicode_flag)
 print(f"Length: {len(files)}")
+print(f"\n\tFlag: {flag}")
