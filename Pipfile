@@ -7,6 +7,8 @@ name = "pypi"
 pillow = "*"
 apng = "*"
 pycryptodomex = "*"
+imageio = "*"
+crypto = "*"
 
 [dev-packages]
 
